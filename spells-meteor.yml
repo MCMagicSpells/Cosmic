@@ -12,7 +12,7 @@ meteor:
     tick-interval: 2
     special-effect-interval: 0
     spell-interval: 20
-    particle-name: hugeexplosion
+    particle-name: hugeexplosion # The primary particle for the projectile to use
     particle-speed: 0.3
     particle-count: 15
     max-distance: 100
@@ -57,16 +57,19 @@ meteorImpactMulti:
                 iterations: 7
                 radius: 13
 
+# The explosion for the center of the meteor impact
 meteorImpactExplosion:
     spell-class: ".targeted.ExplodeSpell"
-    prevent-block-damage: false
-    prevent-player-damage: false
-    prevent-animal-damage: false
+    prevent-block-damage: false # Set to true to avoid breaking blocks
+    prevent-player-damage: false # Set to true if you want to avoid player damage
+    prevent-animal-damage: false # Set to true if you want to avoid animal damage
     damage-multiplier: 1
-    add-fire: false
+    add-fire: false # Should this explosion place fire?
     explosion-size: 20 # change this for bigger or smaller booms
     simulate-tnt: true
 
+# Consider replacing this shockwave system with an alternative implementation
+# Such as particle projectiles
 # Consider adding the 'spell' option to this
 meteorImpactShockwave:
     spell-class: ".instant.FirenovaSpell"
