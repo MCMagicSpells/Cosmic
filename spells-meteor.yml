@@ -1,0 +1,85 @@
+# Meteor cast
+meteor:
+    spell-class: ".instant.ParticleProjectileSpell"
+    start-y-offset: 10.0
+    start-forward-offset: 1.0
+    projectile-velocity: 20.0
+    projectile-vert-offset: 0.0
+    projectile-horiz-offset: 10.0
+    projectile-gravity: 1.0
+    projectile-spread: 0.0
+    power-affects-velocity: true
+    tick-interval: 2
+    special-effect-interval: 0
+    spell-interval: 20
+    particle-name: hugeexplosion
+    particle-speed: 0.3
+    particle-count: 15
+    max-distance: 100
+    max-duration: 0
+    hit-radius: 1.5
+    vertical-hit-radius: 1.5
+    render-distance: 32
+    hit-players: true
+    hit-non-players: true
+    hit-self: true
+    hit-ground: true
+    hit-air-at-end: false
+    hit-air-after-duration: false
+    hit-air-during: false
+    stop-on-hit-entity: true
+    stop-on-hit-ground: true
+    spell: "meteorImpactMulti"
+
+# Meteor impact center
+# Still needs AoE effects such as damage, burning, etc
+meteorImpactMulti:
+    spell-class: ".TargetedMultiSpell"
+    stop-on-fail: false
+    spells:
+        - meteorImpactExplosion
+        - meteorImpactShockwave
+    effects:
+        bigBoom:
+            position: target
+            effect: effectlib
+            effectlib:
+                class: SphereEffect
+                particle: EXPLOSION_HUGE
+                iterations: 5
+                radius: 10
+        flames:
+            position: target
+            effect: effectlib
+            effectlib:
+                class: SphereEffect
+                particle: FLAME
+                iterations: 7
+                radius: 13
+
+meteorImpactExplosion:
+    spell-class: ".targeted.ExplodeSpell"
+    prevent-block-damage: false
+    prevent-player-damage: false
+    prevent-animal-damage: false
+    damage-multiplier: 1
+    add-fire: false
+    explosion-size: 20 # change this for bigger or smaller booms
+    simulate-tnt: true
+
+# Consider adding the 'spell' option to this
+meteorImpactShockwave:
+    spell-class: ".instant.FirenovaSpell"
+    range: 10
+    tick-speed: 5
+    burn-tall-grass: true
+    block-type: "51:15"
+    expanding-radius-change: 1
+    effects:
+        spec:
+            effect: effectlib
+            position: special
+            effectlib:
+                class: SphereEffect
+                iterations: 3
+                particles: 5
